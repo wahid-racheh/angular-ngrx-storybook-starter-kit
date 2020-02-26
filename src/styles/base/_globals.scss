@@ -1,0 +1,33 @@
+/*
+  global css classes
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  margin: 0 1rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+input[type='text']::-ms-clear {
+  /* stylelint-disable selector-no-qualifying-type */
+  display: none;
+}
+
+.full-width-input {
+  width: 100% !important;
+}

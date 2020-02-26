@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col-md-12">
+    <app-navbar
+      class="d-block mb-3"
+      *ngxInit="pageTitle$ | async as pageTitle"
+      [title]="pageTitle"
+    ></app-navbar>
+    <app-product-form-container></app-product-form-container>
+  </div>
+</div>

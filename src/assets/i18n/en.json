@@ -1,0 +1,32 @@
+{
+  "HOME": {
+    "HELLO": "Hello {{value}}"
+  },
+  "NOT_FOUND": {
+    "TITLE": "404. This is an error.",
+    "DESCRIPTION": "The requested URL was not found on the server.",
+    "ALT": "Error 404"
+  },
+  "FORM_ERROR_MESSAGES": {
+    "REQUIRED": "This field is required.",
+    "MIN_LENGTH": "Minimum size {{value}}",
+    "MAX_LENGTH": "Maximum size {{value}}"
+  },
+  "GLOBAL": {
+    "SELECT": "- Select -",
+    "SAVE": "Save",
+    "UPDATE": "Update",
+    "DELETE": "Delete",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "PHONE": "Phone",
+    "LARGE": "LARGE",
+    "SMALL": "SMALL",
+    "MEDIUM": "MEDIUM",
+    "GENDER": "Sex"
+  },
+  "DEMO": {
+    "CUSTOMER_DETAILS": "Customer Details",
+    "SEARCH_CUSTOMER": "Search customer"
+  }
+}

@@ -1,0 +1,62 @@
+image: trion/ng-cli-karma
+
+stages:
+  - tests
+  - schedule
+
+# Cache modules in between jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+#####################################################################
+## Install
+#####################################################################
+
+before_script:
+  - npm config set proxy http://172.16.2.12:8080
+  - npm config set https-proxy http://172.16.2.12:8080
+  # Install dependencies only if node_module folder is not synced
+  - npm check --integrity || npm install --pure-lockfile
+
+#####################################################################
+## Testing
+#####################################################################
+
+tests:
+  stage: tests
+  tags:
+    - docker
+    - cnom
+    - intranet
+  script:
+    # Run all tests and collect coverage
+    - npm run test:coverage
+  # Report Jest coverage (can be different than SonarQube coverage)
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  artifacts:
+    paths:
+      # Expose coverage folder to be accessible by analysis jobs
+      - coverage/
+    expire_in: 1 day
+  except:
+    - schedules
+
+#####################################################################
+## Schedule
+#####################################################################
+
+audit:
+  stage: schedule
+  tags:
+    - docker
+    - cnom
+    - intranet
+  script:
+    # Run security audit on dependencies
+    - npm audit || true
+    # If any "Critical" vulnerability is found, the job will fail
+    - if [ "$(npm audit | sed -E -n 's/^.* ([0-9]{1,}) Critical.*$/\1/p')" -gt "0" ]; then exit 1; fi
+  only:
+    - schedules

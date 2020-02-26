@@ -1,0 +1,28 @@
+<div class="d-flex w-100 radio {{ cssClassName }}" [formGroup]="group">
+  <div class="col-md-4 d-none d-md-flex">
+    <div class="d-flex align-items-center">
+      <span>{{ label }}</span>
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-12">
+    <mat-label class="d-md-none d-block radio__placeholder">{{ placeholder }}</mat-label>
+    <mat-radio-group
+      class="radio__group"
+      [ngClass]="{ 'radio__group--inline': displayInline }"
+      [formControlName]="controlName"
+      [ngStyle]="inputStyle"
+    >
+      <mat-radio-button
+        class="radio__group_item"
+        *ngFor="let item of data"
+        [value]="item[this.optionValue]"
+        matInput
+      >
+        {{ item[optionKey] | translate }}
+      </mat-radio-button>
+    </mat-radio-group>
+    <mat-error class="radio__group_error">
+      <app-error-message [control]="group.get(controlName)"></app-error-message>
+    </mat-error>
+  </div>
+</div>

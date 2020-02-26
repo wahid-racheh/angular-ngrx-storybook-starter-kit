@@ -1,0 +1,52 @@
+<form class="form-container" [formGroup]="form">
+  <div class="row">
+    <div class="col-md-12">
+      <div *ngIf="form.errors?.noProducts && form.dirty" class="ValidationErrorLabel mg-bottom-15">
+        {{ form.errors?.noProducts.message }}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-12">
+          <app-selected-product-viewer
+            (addProduct)="onProductAdd()"
+            [selectedProductGroup]="selectedProductGroup"
+          >
+          </app-selected-product-viewer>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <app-customer-details [group]="form.get('customerDetails')"></app-customer-details>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 mt-2 clearfix">
+          <button
+            class="float-right"
+            mat-raised-button
+            color="primary"
+            (click)="submit(form.value)"
+          >
+            SUBMIT
+          </button>
+          <button class="float-left" mat-raised-button color (click)="reset()">
+            RESET
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <app-product-list
+        [group]="form"
+        (productSelected)="onProductSelected($event)"
+        (addProduct)="onProductAdd()"
+        (deleteProduct)="onProductDelete($event)"
+      >
+      </app-product-list>
+    </div>
+  </div>
+</form>

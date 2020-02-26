@@ -1,0 +1,13 @@
+// Declare skins here
+%at-button-skin-default {
+  cursor: pointer;
+}
+
+@mixin button($selector, $skin: default) {
+  #{$selector} {
+    @extend %at-button-skin-#{$skin} !optional;
+  }
+}
+
+// Include component here
+@include button('.button');

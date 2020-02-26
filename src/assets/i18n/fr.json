@@ -1,0 +1,29 @@
+{
+  "HOME": {
+    "HELLO": "Bonjour {{value}}"
+  },
+  "NOT_FOUND": {
+    "TITLE": "404. C'est une erreur.",
+    "DESCRIPTION": "L'URL demandée est introuvable sur ce serveur.",
+    "ALT": "Erreur 404"
+  },
+  "FORM_ERROR_MESSAGES": {
+    "REQUIRED": "Ce champ est obligatoire.",
+    "MIN_LENGTH": "Taille minimale {{value}}",
+    "MAX_LENGTH": "Taille maximale {{value}}"
+  },
+  "GLOBAL": {
+    "SELECT": "- Sélectionner -",
+    "FIRST_NAME": "Nom",
+    "LAST_NAME": "Prénom",
+    "PHONE": "Téléphone",
+    "LARGE": "LARGE",
+    "SMALL": "PETIT",
+    "MEDIUM": "MOYEN",
+    "GENDER": "Sex"
+  },
+  "DEMO": {
+    "CUSTOMER_DETAILS": "Details Client",
+    "SEARCH_CUSTOMER": "Chercher un client"
+  }
+}

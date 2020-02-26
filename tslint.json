@@ -1,0 +1,32 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-prettier",
+    "tslint-config-airbnb",
+    "tslint-angular",
+    "tslint-sonarts"
+  ],
+  "rules": {
+    "trailing-comma": false,
+    "interface-name": false,
+    "use-component-view-encapsulation": false,
+    "no-inputs-metadata-property": false,
+    "no-outputs-metadata-property": false,
+    "no-host-metadata-property": false,
+    "template-banana-in-box": false,
+    "template-no-negated-async": false,
+    "no-all-duplicated-branches": false,
+    "no-input-rename": false,
+    "no-output-on-prefix": false,
+    "no-inferrable-types": false,
+    "max-classes-per-file": false,
+    "object-shorthand-properties-first": false,
+    "no-duplicate-string": false,
+    "bool-param-default": false,
+    "prefer-array-literal": false,
+    "max-union-size": false,
+    "semicolon": [true, "always", "strict-bound-class-methods"],
+    "align": [true, "parameters"],
+    "no-parameter-reassignment": false
+  }
+}

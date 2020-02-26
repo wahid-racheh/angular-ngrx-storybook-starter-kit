@@ -1,0 +1,118 @@
+<div class="CustomerDetails" [formGroup]="group">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 translate>
+        Customer Details
+      </h3>
+    </div>
+
+    <app-auto-complete
+      class="d-flex w-100"
+      [group]="group"
+      controlName="customer"
+      label="Search customer: (Nicholas)"
+      [data]="customerList$"
+      searchKey="name"
+      [asyncQuery]="true"
+      [showSpinner]="isLoading$ | async"
+      (onSelectItem)="handleSelect($event)"
+      (onSearch)="handleSearch($event)"
+      (onReset)="handleReset()"
+      [debounceTime]="300"
+      [minLength]="2"
+    ></app-auto-complete>
+
+    <app-text-input
+      class="d-flex w-100"
+      [group]="group"
+      controlName="firstName"
+      label="First Name"
+      placeholder="First Name"
+    ></app-text-input>
+
+    <app-text-input
+      class="d-flex w-100"
+      [group]="group"
+      controlName="lastName"
+      label="Last Name"
+      placeholder="Last Name"
+    ></app-text-input>
+
+    <app-select
+      class="d-flex w-100"
+      [group]="group"
+      controlName="gender"
+      label="Gender"
+      placeholder="Gender"
+      selectedValue="M"
+      [data]="genderList"
+      optionKey="text"
+      optionValue="id"
+      (onChange)="handleGenderChange($event)"
+    ></app-select>
+
+    <app-date-picker
+      class="d-flex w-100"
+      [group]="group"
+      controlName="dob"
+      label="Date of birth"
+      placeholder="Date of birth"
+      [defaultValue]="defaultDate"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      (onChange)="handleDobChange($event)"
+    ></app-date-picker>
+
+    <app-text-input
+      class="d-flex w-100"
+      [group]="group"
+      controlName="phoneNumber"
+      label="Phone Number"
+      placeholder="Phone Number"
+    ></app-text-input>
+  </div>
+
+  <div class="row" [formGroup]="addressGroup">
+    <div class="col-md-12">
+      <h3>
+        Delivery Address
+      </h3>
+    </div>
+
+    <div class="col-md-3">
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Street" formControlName="street" />
+        <mat-error>
+          <app-error-message [control]="addressGroup.get('street')"></app-error-message>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-3">
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Apt. Number" formControlName="suite" />
+        <mat-error>
+          <app-error-message [control]="addressGroup.get('suite')"></app-error-message>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-3">
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="City" formControlName="city" />
+        <mat-error>
+          <app-error-message [control]="addressGroup.get('city')"></app-error-message>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-3">
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Zipcode" formControlName="zipcode" />
+        <mat-error>
+          <app-error-message [control]="addressGroup.get('zipcode')"></app-error-message>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

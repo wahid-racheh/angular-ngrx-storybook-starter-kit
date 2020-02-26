@@ -1,0 +1,32 @@
+<div class="row" [formGroup]="group">
+  <div class="col-md-12">
+    <div class="productList">
+      <div class="productList__title">
+        <h2>
+          Products order
+        </h2>
+      </div>
+      <div class="productList__content" formArrayName="products">
+        <div
+          class="productList__item"
+          *ngFor="let product of productsArray.controls; let i = index"
+          [ngClass]="getProductListItemClassStates(product, i)"
+          (click)="productSelected.emit(i)"
+          [formGroup]="product"
+        >
+          <span>
+            {{ getProductTitle(product.value) }}
+          </span>
+
+          <button mat-icon-button (click)="deleteProduct.emit(i); $event.stopPropagation()">
+            <mat-icon class="productList__item__icon">remove_circle</mat-icon>
+          </button>
+        </div>
+
+        <div class="productList__item productList__item--add" (click)="addProduct.emit()">
+          <mat-icon class="productList__item__icon">add_circle</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

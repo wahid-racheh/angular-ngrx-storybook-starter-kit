@@ -1,0 +1,19 @@
+<div class="full">
+  <div class="row ">
+    <div class="col-md-8" *ngxInit="error$ | async as error$">
+      <ng-container *ngIf="error$">
+        <h2 class="h2-responsive mt-3 mb-2" *ngxInit="code$ | async as code">
+          {{ '' + code | translate }}
+        </h2>
+        <h4 *ngxInit="message$ | async as message">{{ '' + message | translate }}</h4>
+      </ng-container>
+      <ng-container *ngIf="!error$">
+        <h2 class="h2-responsive mt-3 mb-2">{{ 'NOT_FOUND.TITLE' | translate }}</h2>
+        <h4>{{ 'NOT_FOUND.DESCRIPTION' | translate }}</h4>
+      </ng-container>
+    </div>
+    <div class="col-md-4">
+      <img src="assets/images/404.png" alt="Error 404" class="img-fluid" />
+    </div>
+  </div>
+</div>

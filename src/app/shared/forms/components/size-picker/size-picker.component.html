@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="size-picker">
+      <div
+        class="size-picker__item"
+        (click)="changeSize(SizeEnum.SMALL)"
+        [ngClass]="{ 'size-picker__item--active': size === SizeEnum.SMALL }"
+      >
+        {{ 'SMALL' | translate }}
+      </div>
+      <div
+        class="size-picker__item"
+        (click)="changeSize(SizeEnum.MEDIUM)"
+        [ngClass]="{ 'size-picker__item--active': size === SizeEnum.MEDIUM }"
+      >
+        {{ 'MEDIUM' | translate }}
+      </div>
+      <div
+        class="size-picker__item"
+        (click)="changeSize(SizeEnum.LARGE)"
+        [ngClass]="{ 'size-picker__item--active': size === SizeEnum.LARGE }"
+      >
+        {{ 'LARGE' | translate }}
+      </div>
+    </div>
+  </div>
+</div>

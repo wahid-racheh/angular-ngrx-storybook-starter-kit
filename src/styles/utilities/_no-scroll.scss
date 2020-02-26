@@ -1,0 +1,18 @@
+%at-no-scroll-skin-default {
+  position: fixed;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+@mixin no-scroll($selector, $skin: default) {
+  #{$selector} {
+    @extend %at-no-scroll-skin-#{$skin} !optional;
+
+    @if $skin == default {
+      // Default component specific
+    }
+  }
+}
+
+// Include component here
+@include no-scroll('.no-scroll');

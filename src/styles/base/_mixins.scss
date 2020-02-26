@@ -1,0 +1,65 @@
+/* clearfix
+===========
+Mixin to apply a clearfix
+*/
+
+@mixin clearfix {
+  &::before,
+  &::after {
+    display: table;
+    content: ' ';
+  }
+
+  &::after {
+    clear: both;
+  }
+}
+
+/* align-middle
+===========
+Mixin to align in middle
+*/
+
+@mixin align-middle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* flex-width
+===========
+Mixin to apply a custom width to a column
+*/
+
+@mixin flex-width($width, $padding: 0) {
+  flex-basis: $width;
+  max-width: $width;
+  padding-right: $padding;
+  padding-left: $padding;
+}
+
+/* placeholder
+===========
+Mixin to apply on an input for styling placeholder
+*/
+
+@mixin placeholder {
+  /* stylelint-disable selector-no-vendor-prefix */
+  &::-webkit-input-placeholder {
+    @content;
+  }
+
+  &:-moz-placeholder {
+    @content;
+  }
+
+  &::-moz-placeholder {
+    @content;
+  }
+
+  &:-ms-input-placeholder {
+    @content;
+  }
+
+  /* stylelint-enable */
+}

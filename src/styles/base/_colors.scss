@@ -1,0 +1,38 @@
+/* Color palette
+================
+Mixin and variables w/ colors
+*/
+
+$color-palette: (
+  /* Main Colors */ classic-white: #fff,
+  tone-primary: #01a4b1,
+  tone-primary-darken: #08919b,
+  tone-secondary: #a02b67,
+  tone-error: #c80808,
+  neutral: #fff,
+  neutral-white-light: #f9f9f9,
+  neutral-white-dark: #f1f1f1,
+  neutral-black: #000,
+  neutral-grey: #d8d8d8,
+  teal-50: #e0f2f1,
+  teal-100: #b2dfdb,
+  teal-200: #80cbc4,
+  teal-300: #4db6ac,
+  teal-400: #26a69a,
+  teal-500: #009688,
+  teal-600: #00897b,
+  teal-700: #00796b,
+  teal-800: #00695c,
+  teal-900: #004d40,
+  teal-A100: #a7ffeb,
+  teal-A200: #64ffda,
+  teal-A400: #1de9b6,
+  teal-A700: #00bfa5
+) !default;
+
+/**
+ * Get a color from the palette w/ a shortcut
+ */
+@function color-palette($name, $palette: $color-palette) {
+  @return map-get($color-palette, $name);
+}

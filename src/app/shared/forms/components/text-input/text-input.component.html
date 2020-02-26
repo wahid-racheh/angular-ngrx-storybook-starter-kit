@@ -1,0 +1,35 @@
+<div class="d-flex w-100 {{ cssClassName }}" [formGroup]="group">
+  <div class="col-md-4 d-none d-md-flex">
+    <div class="d-flex align-items-center">
+      <span>{{ label }}</span>
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-12">
+    <mat-form-field class="full-width-input">
+      <input
+        type="text"
+        matInput
+        [formControlName]="controlName"
+        (blur)="handleBlur($event)"
+        (keypress)="handleBlur($event)"
+        (focus)="handleFocus($event)"
+        [ngStyle]="inputStyle"
+        [attr.type]="attributes?.type || 'text'"
+      />
+      <button
+        mat-button
+        *ngIf="group.get(controlName).value"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="group.get(controlName).setValue(null)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-placeholder class="d-md-none d-block">{{ placeholder }}</mat-placeholder>
+      <mat-error>
+        <app-error-message [control]="group.get(controlName)"></app-error-message>
+      </mat-error>
+    </mat-form-field>
+  </div>
+</div>

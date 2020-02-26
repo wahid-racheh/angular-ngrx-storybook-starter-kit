@@ -1,0 +1,40 @@
+<div
+  class="productSelectorView"
+  [ngClass]="{ 'productSelectorView--empty': !selectedProductGroup }"
+>
+  <div class="row" *ngIf="selectedProductGroup" [formGroup]="selectedProductGroup">
+    <div class="col-md-12" *ngIf="selectedProductGroup.errors?.productTypeSize">
+      <div class="ValidationErrorLabel mg-bottom-15">
+        {{ selectedProductGroup.errors?.productTypeSize?.message }}
+      </div>
+    </div>
+    <div class="col-md-6 offset-md-3">
+      <app-size-picker formControlName="size"></app-size-picker>
+    </div>
+    <div class="col-md-12 mg-top-15">
+      <h5>Types</h5>
+      <div class="typesSelector" formArrayName="types">
+        <div
+          class="typesSelector__item"
+          *ngFor="let type of typesArray.controls"
+          [formGroup]="type"
+        >
+          <mat-checkbox [formControl]="type.get('selected')">
+            {{ type.get('name').value }}
+          </mat-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="!selectedProductGroup" style="height: 100%">
+    <div class="productSelectorView__no-selected">
+      <h4>
+        You have not selected any products yet.
+      </h4>
+      <button mat-button color="primary" (click)="addProduct.emit()">
+        <mat-icon>add_circle</mat-icon>
+        Add one
+      </button>
+    </div>
+  </div>
+</div>

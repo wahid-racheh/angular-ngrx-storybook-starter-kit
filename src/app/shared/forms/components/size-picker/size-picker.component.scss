@@ -1,0 +1,29 @@
+@import '../../../../../styles/main';
+
+.size-picker {
+  max-width: 700px;
+  display: flex;
+
+  &__item {
+    flex: 1;
+    border: 1px solid color-palette(teal-A700);
+    border-right: none;
+    padding: 15px;
+    text-align: center;
+    transition: 0.3s all ease-in;
+
+    &:last-child {
+      border-right: 1px solid color-palette(teal-A700);
+    }
+
+    &:hover {
+      cursor: pointer;
+      background: color-palette(teal-100);
+    }
+
+    &.size-picker__item--active {
+      background: color-palette(teal-300);
+      color: white;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/spec",
+    "types": ["jest", "node", "webpack-env", "jquery", "jsdom"],
+    "module": "commonjs",
+    "allowJs": true
+  },
+  "files": ["../jest-config/setup.ts"],
+  "include": ["**/*.spec.ts", "**/*.d.ts"]
+}

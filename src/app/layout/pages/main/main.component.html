@@ -1,0 +1,10 @@
+<app-header></app-header>
+
+<main class="py-0 px-0 my-0 mx-0 mx-lg-5" *ngxInit="showErrorPage$ | async as showErrorPage">
+  <div class="mt-5 container">
+    <ng-container *ngIf="!showErrorPage"><router-outlet></router-outlet></ng-container>
+    <app-not-found *ngIf="showErrorPage"></app-not-found>
+  </div>
+</main>
+
+<app-footer></app-footer>

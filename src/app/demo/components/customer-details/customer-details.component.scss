@@ -1,0 +1,25 @@
+.CustomerDetails {
+  margin-top: 15px;
+}
+
+.mat-form-field.mat-form-field-hide-placeholder {
+  .mat-form-field-infix {
+    .mat-input-element::placeholder {
+      color: transparent !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+  }
+}
+
+.mat-input-element::placeholder {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+md-input-container label {
+  color: red !important;
+}
+
+md-input-container.md-input-focused label {
+  color: blue !important;
+}

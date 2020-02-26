@@ -1,0 +1,25 @@
+<div class="d-flex w-100 {{ cssClassName }}" [formGroup]="group">
+  <div class="col-md-4 d-none d-md-flex">
+    <div class="d-flex align-items-center">
+      <span>{{ label }}</span>
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-12">
+    <mat-label class="d-md-none d-block checkbox__placeholder">{{ placeholder }}</mat-label>
+    <div
+      class="checkbox__group"
+      [ngClass]="{ 'checkbox__group--inline': displayInline }"
+      [formArrayName]="controlName"
+      [ngStyle]="inputStyle"
+    >
+      <div class="checkbox__group_item" *ngFor="let item of itemsArray.controls" [formGroup]="item">
+        <mat-checkbox [formControl]="item.get('selected')">
+          {{ item.get('name').value | translate }}
+        </mat-checkbox>
+      </div>
+    </div>
+    <mat-error class="checkbox__group_error">
+      <app-error-message [control]="group.get(controlName)"></app-error-message>
+    </mat-error>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+@import '../../../../../styles/base/variables';
+
+.radio {
+  &__group {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 0;
+    padding-left: 0;
+
+    ::ng-deep {
+      .mat-radio-label {
+        display: block;
+        font-weight: unset;
+      }
+      .mat-radio-label-content {
+        position: relative;
+        top: -0.5rem;
+      }
+    }
+
+    &--inline {
+      flex-direction: row;
+    }
+
+    &_item {
+      margin-top: 0.5rem;
+      margin-right: 1rem;
+    }
+
+    &_error {
+      font-family: $form-font-family;
+      font-size: 75%;
+      font-weight: 400;
+      line-height: 1.125;
+    }
+  }
+
+  &__placeholder {
+    color: rgba(0, 0, 0, 0.54);
+    left: 0;
+    font-size: 0.8rem;
+    font-weight: 400;
+    font-family: $form-font-family;
+    line-height: 1.125;
+    pointer-events: none;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}

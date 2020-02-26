@@ -1,0 +1,18 @@
+%at-no-overflow-skin-default {
+  // Default skin here
+
+  overflow: hidden;
+}
+
+@mixin no-overflow($selector, $skin: default) {
+  #{$selector} {
+    @extend %at-no-overflow-skin-#{$skin} !optional;
+
+    @if $skin == default {
+      // Default component specific
+    }
+  }
+}
+
+// Include component here
+@include no-overflow('.no-overflow');

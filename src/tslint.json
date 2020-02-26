@@ -1,0 +1,23 @@
+{
+  "extends": "../tslint.json",
+  "rules": {
+    "directive-selector": [true, "attribute", "app", "camelCase"],
+    "component-selector": [true, "element", "app", "kebab-case"],
+    "import-name": [false],
+    "max-line-length": [
+      true,
+      {
+        "limit": 150,
+        "ignore-pattern": "^import [^,]+ from |^} from"
+      }
+    ],
+    "member-access": true,
+    "no-increment-decrement": false,
+    "no-parameter-reassignment": false,
+    "ter-arrow-parens": false,
+    "ter-indent": false,
+    "align": [false, "arguments"],
+    "use-view-encapsulation": false,
+    "directive-selector": [false, "attribute", "app", "camelCase"]
+  }
+}
