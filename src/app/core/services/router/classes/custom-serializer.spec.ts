@@ -7,10 +7,8 @@ const mock = <T, P extends keyof T>(obj: Pick<T, P>): T => obj as T;
 describe('CustomSerializer', () => {
   it('should return only `url`, `params` and `queryParams` in the state snapshot', () => {
     // GIVEN
-    const route: ActivatedRouteSnapshot = mock<
-      ActivatedRouteSnapshot,
-      'params' | 'queryParams' | 'fragment' | 'data'
-    >({
+    type routeParams = 'params' | 'queryParams' | 'fragment' | 'data';
+    const route: ActivatedRouteSnapshot = mock<ActivatedRouteSnapshot, routeParams>({
       params: {
         val: 'test'
       },

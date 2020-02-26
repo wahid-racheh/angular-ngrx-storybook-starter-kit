@@ -43,10 +43,10 @@ describe('RouterEffects', () => {
   });
 
   beforeEach(() => {
-    effects = TestBed.get(RouterEffects);
-    routerService = TestBed.get(Router);
-    locationService = TestBed.get(Location);
-    actions$ = TestBed.get(Actions);
+    effects = TestBed.inject(RouterEffects);
+    routerService = TestBed.inject(Router);
+    locationService = TestBed.inject(Location);
+    actions$ = TestBed.inject(Actions);
 
     forwardSpy = spyOn(locationService, 'forward');
     backSpy = spyOn(locationService, 'back');

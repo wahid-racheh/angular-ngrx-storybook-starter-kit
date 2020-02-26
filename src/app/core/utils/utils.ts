@@ -22,7 +22,7 @@ export const stringToJson = (input: string): any => {
   if (input) {
     input = input
       .replace(/\\n/g, '\\n')
-      .replace(/\\'/g, "\\'")
+      .replace(/\\'/g, '\\\\')
       .replace(/\\"/g, '\\"')
       .replace(/\\&/g, '\\&')
       .replace(/\\r/g, '\\r')

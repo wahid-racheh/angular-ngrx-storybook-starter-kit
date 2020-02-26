@@ -16,7 +16,7 @@ describe('SafeHtmlPipe', () => {
         }
       ]
     });
-    sanitizer = TestBed.get(DomSanitizer);
+    sanitizer = TestBed.inject(DomSanitizer);
     pipe = new SafeHtmlPipe(sanitizer);
   });
 

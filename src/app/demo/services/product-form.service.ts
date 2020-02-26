@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { SizeEnum } from '@app/core/types/size.enum';
 import {
   IProductFormInterface,
   ITypeItem,
   ProductTypesEnum
 } from '@app/demo/interfaces/product-form.interface';
-import { SizeEnum } from '@app/core/types/size.enum';
+import { ProductFormValidatorsService } from '@app/demo/services/product-form-validators.service';
 import { FormValidatorsService } from '@app/shared/forms/services/form-validators.service';
-import { ProductFormValidatorsService } from './product-form-validators.service';
 
 @Injectable()
 export class ProductFormService {

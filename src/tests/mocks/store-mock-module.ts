@@ -6,9 +6,9 @@ import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from '@ngrx
 import { provideMockStore } from '@ngrx/store/testing';
 import { of } from 'rxjs';
 
-import { DemoFacade } from '@app/demo/+store/demo.facade';
-import { UserFacade } from '@app/core/services/user/+store/user.facade';
 import { ErrorFacade } from '@app/core/interceptors/error/+store/error.facade';
+import { UserFacade } from '@app/core/services/user/+store/user.facade';
+import { DemoFacade } from '@app/demo/+store/demo.facade';
 
 import * as userMock from '@assets/mocks/user.mock.json';
 

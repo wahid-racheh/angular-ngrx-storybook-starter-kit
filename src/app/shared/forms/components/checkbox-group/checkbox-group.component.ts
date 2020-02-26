@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormGroup, FormControl } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
 
 import { BaseInput } from '@app/shared/forms/classes/base-input.class';
 import { handleInputValueChangesEvent } from '@app/shared/forms/helpers/form-helpers';

@@ -1,11 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 
 import * as ErrorActions from '@app/core/interceptors/error/+store/error.actions';
-import { getError } from '@app/core/interceptors/error/helpers/error.helpers';
 import {
   errorInitialState as initialState,
   errorReducer as reducer
 } from '@app/core/interceptors/error/+store/error.reducer';
+import { getError } from '@app/core/interceptors/error/helpers/error.helpers';
 
 describe('ErrorReducer', () => {
   describe('undefined action', () => {

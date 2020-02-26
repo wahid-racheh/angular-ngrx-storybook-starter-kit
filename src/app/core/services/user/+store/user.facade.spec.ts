@@ -14,8 +14,8 @@ describe('UserFacade', () => {
     TestBed.configureTestingModule({
       providers: [UserFacade, provideMockStore()]
     });
-    store = TestBed.get(Store);
-    facade = TestBed.get(UserFacade);
+    store = TestBed.inject(Store);
+    facade = TestBed.inject(UserFacade);
     spyOn(store, 'dispatch');
   });
 

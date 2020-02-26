@@ -29,9 +29,9 @@ describe('UserEffects', () => {
       ]
     });
 
-    effects = TestBed.get(UserEffects);
-    service = TestBed.get(UserService);
-    actions$ = TestBed.get(Actions);
+    effects = TestBed.inject(UserEffects);
+    service = TestBed.inject(UserService);
+    actions$ = TestBed.inject(Actions);
   });
 
   describe('getUser$', () => {

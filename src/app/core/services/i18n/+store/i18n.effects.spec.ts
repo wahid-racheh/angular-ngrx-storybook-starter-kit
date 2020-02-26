@@ -26,9 +26,9 @@ describe('I18nEffects', () => {
       ]
     });
 
-    effects = TestBed.get(I18nEffects);
-    service = TestBed.get(I18nService);
-    actions$ = TestBed.get(Actions);
+    effects = TestBed.inject(I18nEffects);
+    service = TestBed.inject(I18nService);
+    actions$ = TestBed.inject(Actions);
   });
 
   describe('setLanguage$', () => {

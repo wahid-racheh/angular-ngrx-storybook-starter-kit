@@ -22,8 +22,8 @@ describe('ApiService', () => {
 
   beforeEach(() => {
     environment.baseUrl = '';
-    service = TestBed.get(ApiService);
-    httpMock = TestBed.get(HttpTestingController);
+    service = TestBed.inject(ApiService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
   afterEach(() => {

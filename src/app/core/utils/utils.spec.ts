@@ -17,13 +17,13 @@ describe('CoreUtils', () => {
   describe('stringToJson', () => {
     it('should convert json string to json object', () => {
       // GIVEN
-      const string =
-        "{'target':'test nom 2', 'targetCodeCD':'test prenom 2', 'email':'email@email.com'}";
+      const obj = { name: 'test nom 2', email: 'email@email.com' };
+      const string = JSON.stringify(obj);
       // WHEN
       const json = stringToJson(string);
       // THEN
       expect(json).not.toBe(null);
-      expect(json.target).toEqual('test nom 2');
+      expect(json.name).toEqual('test nom 2');
     });
   });
 

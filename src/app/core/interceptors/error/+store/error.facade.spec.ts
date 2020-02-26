@@ -16,8 +16,8 @@ describe('ErrorFacade', () => {
     TestBed.configureTestingModule({
       providers: [ErrorFacade, provideMockStore()]
     });
-    store = TestBed.get(Store);
-    facade = TestBed.get(ErrorFacade);
+    store = TestBed.inject(Store);
+    facade = TestBed.inject(ErrorFacade);
     spyOn(store, 'dispatch');
   });
 

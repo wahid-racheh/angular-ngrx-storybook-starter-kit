@@ -20,7 +20,7 @@ describe('DemoResolverService', () => {
   );
 
   beforeEach(() => {
-    service = TestBed.get(DemoResolverService);
+    service = TestBed.inject(DemoResolverService);
   });
 
   it('should be created', () => {

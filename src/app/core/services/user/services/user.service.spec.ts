@@ -21,8 +21,8 @@ describe('UserService', () => {
 
   beforeEach(() => {
     environment.useMock = false;
-    service = TestBed.get(UserService);
-    httpMock = TestBed.get(HttpTestingController);
+    service = TestBed.inject(UserService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
   it('should be created', () => {

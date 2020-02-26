@@ -14,8 +14,8 @@ describe('DemoEffects', () => {
       providers: [DemoEffects, provideMockActions(() => actions$)]
     });
 
-    effects = TestBed.get(DemoEffects);
-    actions$ = TestBed.get(Actions);
+    effects = TestBed.inject(DemoEffects);
+    actions$ = TestBed.inject(Actions);
   });
 
   it('should be created', () => {

@@ -6,9 +6,9 @@ import { Observable, of } from 'rxjs';
 
 import * as ErrorActions from '@app/core/interceptors/error/+store/error.actions';
 import { ErrorEffects } from '@app/core/interceptors/error/+store/error.effects';
+import { getError } from '@app/core/interceptors/error/helpers/error.helpers';
 import { ErrorInterceptorService } from '@app/core/interceptors/error/services/error-interceptor.service';
 import { RouterFacade } from '@app/core/services/router/+store/router.facade';
-import { getError } from '@app/core/interceptors/error/helpers/error.helpers';
 
 describe('ErrorEffects', () => {
   let effects: ErrorEffects;
@@ -31,9 +31,9 @@ describe('ErrorEffects', () => {
       ]
     });
 
-    effects = TestBed.get(ErrorEffects);
-    service = TestBed.get(ErrorInterceptorService);
-    actions$ = TestBed.get(Actions);
+    effects = TestBed.inject(ErrorEffects);
+    service = TestBed.inject(ErrorInterceptorService);
+    actions$ = TestBed.inject(Actions);
   });
 
   describe('throw404Error$', () => {

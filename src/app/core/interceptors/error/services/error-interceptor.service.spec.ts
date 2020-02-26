@@ -9,7 +9,7 @@ describe('ErrorInterceptorService', () => {
   let http: HttpClient;
   let httpMock: HttpTestingController;
   let service: ErrorInterceptorService;
-  let errorService: ErrorFacade;
+  let errorFacade: ErrorFacade;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -33,10 +33,10 @@ describe('ErrorInterceptorService', () => {
       ]
     });
 
-    http = TestBed.get(HttpClient);
-    httpMock = TestBed.get(HttpTestingController);
-    service = TestBed.get(ErrorInterceptorService);
-    errorService = TestBed.get(ErrorInterceptorService);
+    http = TestBed.inject(HttpClient);
+    httpMock = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(ErrorInterceptorService);
+    errorFacade = TestBed.inject(ErrorFacade);
   });
 
   afterEach(() => {

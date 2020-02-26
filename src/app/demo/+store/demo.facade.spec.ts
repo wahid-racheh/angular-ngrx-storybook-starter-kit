@@ -14,8 +14,8 @@ describe('DemoFacade', () => {
     TestBed.configureTestingModule({
       providers: [DemoFacade, provideMockStore()]
     });
-    store = TestBed.get(Store);
-    facade = TestBed.get(DemoFacade);
+    store = TestBed.inject(Store);
+    facade = TestBed.inject(DemoFacade);
     spyOn(store, 'dispatch');
   });
 
