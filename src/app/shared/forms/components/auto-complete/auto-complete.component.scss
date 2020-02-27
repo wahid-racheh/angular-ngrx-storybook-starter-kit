@@ -1,0 +1,7 @@
+.autocomplete {
+  ::ng-deep {
+    .mat-form-field-infix {
+      display: flex;
+    }
+  }
+}

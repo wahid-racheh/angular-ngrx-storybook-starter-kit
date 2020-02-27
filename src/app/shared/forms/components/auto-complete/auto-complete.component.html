@@ -1,4 +1,4 @@
-<div class="d-flex w-100 {{ cssClassName }}" [formGroup]="group">
+<div class="d-flex w-100 autocomplete {{ cssClassName }}" [formGroup]="group">
   <div class="col-md-4 d-none d-md-flex">
     <div class="d-flex align-items-center">
       <span>{{ label }}</span>
@@ -19,6 +19,14 @@
         [attr.type]="attributes?.type || 'text'"
         [ngStyle]="inputStyle"
       />
+      <mat-progress-spinner
+        *ngIf="showSpinner"
+        [color]="spinnerColor"
+        mode="indeterminate"
+        [diameter]="spinnerSize"
+      >
+      </mat-progress-spinner>
+
       <mat-placeholder class="d-md-none d-block">{{ placeholder }}</mat-placeholder>
       <button
         mat-button
