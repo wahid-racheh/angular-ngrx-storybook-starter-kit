@@ -29,7 +29,7 @@ module.exports = {
   coverageReporters: ['json', 'lcov', 'html', 'text'],
   collectCoverageFrom: [
     '<rootDir>/src/app/**/*.ts',
-    '!**/*-routing.module.ts',
+    '!**/*.module.ts',
     '!**/*.mock.ts',
     '!**/*.stories.ts',
     '!**/+store/**/*.actions.ts',
