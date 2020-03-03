@@ -2,6 +2,7 @@ image: trion/ng-cli-karma
 
 stages:
   - tests
+  - build
   - schedule
 
 # Cache modules in between jobs
@@ -15,11 +16,11 @@ cache:
 #####################################################################
 
 before_script:
-  - npm config set proxy http://172.16.2.12:8080
-  - npm config set https-proxy http://172.16.2.12:8080
+  #- npm config set proxy http://[ip]:[port]
+  #- npm config set https-proxy http://[ip]:[port]
   # Install dependencies only if node_module folder is not synced
   - npm check --integrity || npm install --pure-lockfile
-
+   
 #####################################################################
 ## Testing
 #####################################################################
@@ -28,8 +29,8 @@ tests:
   stage: tests
   tags:
     - docker
-    - cnom
-    - intranet
+    - angular
+    - ngrx
   script:
     # Run all tests and collect coverage
     - npm run test:coverage
@@ -44,6 +45,30 @@ tests:
     - schedules
 
 #####################################################################
+## Building
+#####################################################################
+
+build:
+  stage: build
+  tags:
+    - docker
+    - angular
+    - ngrx
+  script:
+    # TODO configure semantic-release
+    # Create a new release in Gitlab with CHANGELOG automaticaly generated from Git history
+    #- node_modules/.bin/semantic-release
+    # Build the app ready for production
+    - npm run build
+  artifacts:
+    paths:
+      # Expose app built artifacts to be accessible by other jobs
+      - dist/
+    expire_in: 2 day
+  except:
+    - schedules
+    
+#####################################################################
 ## Schedule
 #####################################################################
 
@@ -51,8 +76,8 @@ audit:
   stage: schedule
   tags:
     - docker
-    - cnom
-    - intranet
+    - angular
+    - ngrx
   script:
     # Run security audit on dependencies
     - npm audit || true
