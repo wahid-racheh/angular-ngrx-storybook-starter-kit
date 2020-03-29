@@ -54,6 +54,9 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "es5": {
+              "tsConfig": "src/tsconfig-es5.app.json"
             }
           }
         },
@@ -65,6 +68,9 @@
           "configurations": {
             "production": {
               "browserTarget": "angular-ngrx-storybook-starter-kit:build:production"
+            },
+            "es5": {
+              "browserTarget": "angular-ngrx-storybook-starter-kit:build:es5"
             }
           }
         },

@@ -57,6 +57,7 @@ You are now ready to go, your application is available at http://localhost:4200.
 There are some `tasks` available in `package.json`.
 
 - **start** - Run the application in development server
+- **start:ie** - Run the application in development server with internet explorer support
 - **build** - Build the app in production mode
 - **test** - Run test
 - **test:debug** - Run test with debug mode
