@@ -54,7 +54,7 @@ describe('ApiService', () => {
       service.get(url).subscribe(
         () => {},
         (response: any) => {
-          expect(response).toEqual(mockData.error);
+          expect(response.message).toEqual(mockData.error.message);
         }
       );
       // THEN
@@ -85,7 +85,7 @@ describe('ApiService', () => {
       service.post(url, {}).subscribe(
         () => {},
         (response: any) => {
-          expect(response).toEqual(mockData.error);
+          expect(response.message).toEqual(mockData.error.message);
         }
       );
       // THEN
@@ -116,7 +116,7 @@ describe('ApiService', () => {
       service.put(url, {}).subscribe(
         () => {},
         (response: any) => {
-          expect(response).toEqual(mockData.error);
+          expect(response.message).toEqual(mockData.error.message);
         }
       );
       // THEN
@@ -147,7 +147,7 @@ describe('ApiService', () => {
       service.delete(url).subscribe(
         () => {},
         (response: any) => {
-          expect(response).toEqual(mockData.error);
+          expect(response.message).toEqual(mockData.error.message);
         }
       );
       // THEN

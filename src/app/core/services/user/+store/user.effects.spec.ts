@@ -4,9 +4,12 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { cold, getTestScheduler, hot } from 'jasmine-marbles';
 import { Observable } from 'rxjs';
 
+import { ErrorFacade } from '@app/core/interceptors/error/+store/error.facade';
 import * as UserActions from '@app/core/services/user/+store/user.actions';
 import { UserEffects } from '@app/core/services/user/+store/user.effects';
 import { UserService } from '@app/core/services/user/services/user.service';
+import { environment } from '@env/environment';
+
 import * as userMock from '@assets/mocks/user.mock.json';
 
 describe('UserEffects', () => {
@@ -18,6 +21,13 @@ describe('UserEffects', () => {
     TestBed.configureTestingModule({
       providers: [
         UserEffects,
+        {
+          provide: ErrorFacade,
+          useValue: {
+            throwCustomError: () => {},
+            showErrorPage: () => {}
+          }
+        },
         {
           provide: UserService,
           useValue: {
@@ -32,6 +42,8 @@ describe('UserEffects', () => {
     effects = TestBed.inject(UserEffects);
     service = TestBed.inject(UserService);
     actions$ = TestBed.inject(Actions);
+
+    environment.mockHttpDebounceTime = 0;
   });
 
   describe('getUser$', () => {
@@ -47,7 +59,11 @@ describe('UserEffects', () => {
       // WHEN
       service.getById = jest.fn(() => response);
       // THEN
-      expect(effects.getUser$).toBeObservable(expected);
+      expect(
+        effects.getUser$({
+          scheduler: getTestScheduler()
+        })
+      ).toBeObservable(expected);
     });
 
     it('should return a UserActions.getUserFail, if the query throws', () => {
@@ -63,7 +79,11 @@ describe('UserEffects', () => {
       // WHEN
       service.getById = jest.fn(() => response);
       // THEN
-      expect(effects.getUser$).toBeObservable(expected);
+      expect(
+        effects.getUser$({
+          scheduler: getTestScheduler()
+        })
+      ).toBeObservable(expected);
     });
   });
 

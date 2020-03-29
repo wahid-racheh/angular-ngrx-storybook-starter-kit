@@ -36,15 +36,7 @@ export class ErrorFacade {
   }
 
   public throwCustomError(error: CustomError) {
-    this.store.dispatch(
-      ErrorActions.throwCustomError({
-        error: {
-          status: error.status,
-          message: error.message,
-          error: new Error(error.message)
-        }
-      })
-    );
+    this.store.dispatch(ErrorActions.throwCustomError({ error }));
   }
 
   public showErrorPage() {

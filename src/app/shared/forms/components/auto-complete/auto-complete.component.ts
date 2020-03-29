@@ -47,8 +47,8 @@ export class AutoCompleteComponent extends BaseInput implements OnInit {
   }
 
   public resetControl(): void {
-    this.showSpinner = false;
     if (this.control.value === null || !this.control.value.toString().length) {
+      this.showSpinner = false;
       this.onReset.emit();
       this.filteredItems = this.data;
     }

@@ -13,7 +13,12 @@ export const throwMockHttpError = (response: any): Observable<any> => {
   return of(response).pipe(
     map(error => error),
     tap((error: any) => {
-      throw getError(error.status, error.message);
+      const result: any = getError(error.status, error.message);
+      result.status = error.status;
+      result.code = error.code;
+      result.message = error.message;
+      result.error = error;
+      throw result;
     })
   );
 };

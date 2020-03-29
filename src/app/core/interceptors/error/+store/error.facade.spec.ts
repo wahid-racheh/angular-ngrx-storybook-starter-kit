@@ -16,6 +16,7 @@ describe('ErrorFacade', () => {
     TestBed.configureTestingModule({
       providers: [ErrorFacade, provideMockStore()]
     });
+    // @ts-ignore
     store = TestBed.inject(Store);
     facade = TestBed.inject(ErrorFacade);
     spyOn(store, 'dispatch');
@@ -68,15 +69,12 @@ describe('ErrorFacade', () => {
     // GIVEN
     const error = {
       status: 406,
-      message: 'Error!',
-      error: new Error('Error!')
+      code: '406',
+      message: 'Error!'
     };
     const action = ErrorActions.throwCustomError({ error });
     // WHEN
-    facade.throwCustomError({
-      status: error.status,
-      message: error.message
-    });
+    facade.throwCustomError(error);
     // THEN
     expect(store.dispatch).toHaveBeenLastCalledWith(action);
   });

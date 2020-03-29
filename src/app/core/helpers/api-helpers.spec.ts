@@ -20,12 +20,12 @@ describe('ApiHelpers', () => {
     // THEN
     expect(() => {
       handleError(new HttpErrorResponse(mockedError));
-    }).toThrowError(Error);
+    }).toThrowError();
 
     // WHEN
     // THEN
     expect(() => {
       handleError({ message: 'This is an error' });
-    }).toThrowError(Error);
+    }).toThrowError();
   });
 });

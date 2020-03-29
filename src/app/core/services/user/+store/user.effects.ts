@@ -11,22 +11,33 @@ import {
   takeUntil
 } from 'rxjs/operators';
 
+import { ErrorFacade } from '@app/core/interceptors/error/+store/error.facade';
 import * as UserActions from '@app/core/services/user/+store/user.actions';
 import { User } from '@app/core/services/user/models/user.interface';
 import { UserService } from '@app/core/services/user/services/user.service';
+import { environment } from '@env/environment';
 
 @Injectable()
 export class UserEffects {
-  constructor(private actions$: Actions, private userService: UserService) {}
+  constructor(
+    private actions$: Actions,
+    private userService: UserService,
+    private errorFacade: ErrorFacade
+  ) {}
 
-  public getUser$ = createEffect(() =>
+  public getUser$ = createEffect(() => ({ scheduler = asyncScheduler } = {}) =>
     this.actions$.pipe(
       ofType(UserActions.getUser),
+      debounceTime(environment.mockHttpDebounceTime, scheduler),
       map(action => action),
       concatMap(action =>
         this.userService.getById(action.id).pipe(
           map((response: User) => UserActions.getUserSuccess({ response })),
-          catchError(error => of(UserActions.getUserFail(error)))
+          catchError((error: any) => {
+            this.errorFacade.throwCustomError(error);
+            this.errorFacade.showErrorPage();
+            return of(UserActions.getUserFail(error));
+          })
         )
       )
     )
@@ -47,7 +58,11 @@ export class UserEffects {
           takeUntil(nextSearch$),
           map((data: User[]) => data.filter(u => u.name.toLowerCase().indexOf(name) > -1)),
           map((users: User[]) => UserActions.searchSuccess({ response: users })),
-          catchError((error: any) => of(UserActions.searchFail({ error })))
+          catchError((error: any) => {
+            this.errorFacade.throwCustomError(error);
+            this.errorFacade.showErrorPage();
+            return of(UserActions.searchFail({ error }));
+          })
         );
       })
     )

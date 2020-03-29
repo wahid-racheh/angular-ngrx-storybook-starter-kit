@@ -1,21 +1,29 @@
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { async, TestBed } from '@angular/core/testing';
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { ErrorFacade } from '@app/core/interceptors/error/+store/error.facade';
 import { ErrorInterceptorService } from '@app/core/interceptors/error/services/error-interceptor.service';
 
 describe('ErrorInterceptorService', () => {
+  let service: ErrorInterceptorService;
   let http: HttpClient;
   let httpMock: HttpTestingController;
-  let service: ErrorInterceptorService;
+  let router: Router;
   let errorFacade: ErrorFacade;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, RouterTestingModule.withRoutes([])],
       providers: [
         ErrorInterceptorService,
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: ErrorInterceptorService,
+          multi: true
+        },
         {
           provide: ErrorFacade,
           useValue: {
@@ -24,19 +32,20 @@ describe('ErrorInterceptorService', () => {
             throwUnauthorizedError: jest.fn(),
             throwCustomError: jest.fn()
           }
-        },
-        {
-          provide: HTTP_INTERCEPTORS,
-          useClass: ErrorInterceptorService,
-          multi: true
         }
       ]
     });
-
+    service = TestBed.inject(ErrorInterceptorService);
     http = TestBed.inject(HttpClient);
     httpMock = TestBed.inject(HttpTestingController);
-    service = TestBed.inject(ErrorInterceptorService);
+    router = TestBed.inject(Router);
     errorFacade = TestBed.inject(ErrorFacade);
+
+    spyOn(service, 'intercept');
+  });
+
+  beforeEach(() => {
+    httpMock.verify();
   });
 
   afterEach(() => {
@@ -45,52 +54,70 @@ describe('ErrorInterceptorService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+    expect(errorFacade).toBeTruthy();
   });
 
+  it('should throw `throw500Error`', fakeAsync(() => {
+    callHttp(500, 'Internal server error', (response: any) => {
+      expect(response.status).toEqual(500);
+      expect(response.statusText).toEqual('Internal server error');
+      expect(errorFacade.throw500Error).toHaveBeenCalled();
+    });
+  }));
+
+  it('should throw `throwUnauthorizedError`', fakeAsync(() => {
+    callHttp(403, 'Unauthorized', (response: any) => {
+      expect(response.status).toEqual(403);
+      expect(response.statusText).toEqual('Unauthorized');
+      expect(errorFacade.throwUnauthorizedError).toHaveBeenCalled();
+    });
+  }));
+
+  it('should throw `throw404Error`', fakeAsync(() => {
+    callHttp(404, '404 not found', (response: any) => {
+      expect(response.status).toEqual(400);
+      expect(response.statusText).toEqual('404 not found');
+      expect(errorFacade.throw404Error).toHaveBeenCalled();
+    });
+  }));
+
+  it('should throw `throwCustomError`', fakeAsync(() => {
+    callHttp(0, 'custom error', (response: any) => {
+      expect(response.status).toEqual(0);
+      expect(response.statusText).toEqual('custom error');
+      expect(errorFacade.throwCustomError).toHaveBeenCalled();
+    });
+  }));
+
+  it('should return success response', fakeAsync(() => {
+    callHttp(200, 'Success', (response: any) => {
+      expect(response.status).toEqual(200);
+      expect(response.statusText).toEqual('Success');
+    });
+  }));
+
   const callHttp = (status: number, statusText: string, cb) =>
-    async(() => {
-      http.get('/api').subscribe(
-        response => {
+    fakeAsync(() => {
+      router.initialNavigation();
+      tick(100);
+
+      expect(errorFacade.resetState).toHaveBeenCalled();
+
+      http.get('/fakeApi').subscribe(
+        (response: any) => {
+          tick(100);
           expect(response).toBeTruthy();
           cb(response);
         },
-        error => {
+        (error: any) => {
+          tick(100);
           expect(error).toBeTruthy();
           cb(error);
         }
       );
-      const httpRequest = httpMock.expectOne('/api');
-      httpRequest.flush('', { status, statusText });
-      httpMock.verify();
-    });
 
-  it('should throw `throw500Error`', async(() => {
-    callHttp(500, 'Internal server error', (response: any) => {
-      expect(errorService.throw500Error).toHaveBeenCalled();
+      const req = httpMock.expectOne('/fakeApi');
+      expect(req.request.method).toEqual('GET');
+      req.flush({ status, statusText });
     });
-  }));
-
-  it('should throw `throwUnauthorizedError`', async(() => {
-    callHttp(403, 'Unauthorized', (response: any) => {
-      expect(errorService.throwUnauthorizedError).toHaveBeenCalled();
-    });
-  }));
-
-  it('should throw `throw404Error`', async(() => {
-    callHttp(404, '404 not found', (response: any) => {
-      expect(errorService.throw404Error).toHaveBeenCalled();
-    });
-  }));
-
-  it('should throw `throwCustomError`', async(() => {
-    callHttp(0, 'custom error', (response: any) => {
-      expect(errorService.throwCustomError).toHaveBeenCalled();
-    });
-  }));
-
-  it('should return success response', async(() => {
-    callHttp(200, 'Success', (response: any) => {
-      expect(response).toBeDefined();
-    });
-  }));
 });
